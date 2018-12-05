@@ -23,6 +23,8 @@ class Guard(object):
     
     def most_asleep_time(self):
         freq = self.get_sleep_freq()
+        if not freq:
+            return None
         most_asleep_min = sorted(list(freq.items()), key=lambda x: x[1], reverse=True)[0][0]
         return most_asleep_min
 
@@ -96,6 +98,7 @@ def build_guard_objects(logs):
 
 
 def main():
+    # Part 1
     logs = [s for s in open("input.txt").read().split("\n") if s]
     data = read_logs(logs)
     organized_logs = organize_logs(data)
@@ -108,6 +111,24 @@ def main():
         f"Most asleep guard is {gid} with {asleep_time} minutes asleep - most",
         f"commonly at minute {most_common_sleep_time}"
     )
+
+    # Part 2
+    sleep_freqs = []
+    for guard in guard_pool:
+        freq = guard.get_sleep_freq()
+        most_freq = guard.most_asleep_time()
+        sleep_freqs.append((guard.id, most_freq, freq.get(most_freq, 0)))
+    sleep_freqs = sorted(sleep_freqs, key=lambda x: x[2], reverse=True)
+    
+    gid, minute, amt = sleep_freqs[0]
+    # This puzzle is buggy - both guard 857 and 1723 are tied for 19 sleeps in
+    # a minute but thepuzzle only accepts 1723 as the correct response
+    print(sleep_freqs)
+    print(
+        f"Guard {gid} was asleep the most times at minute {minute} for a",
+        f"total of {amt} minutes"
+    )
+    
 
 
 main()
