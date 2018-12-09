@@ -126,12 +126,6 @@ def ingest(text):
     return coords
 
 
-text = """1, 1
-1, 6
-8, 3
-3, 4
-5, 5
-8, 9"""
 text = open("input.txt").read()
 points = [Point(s) for s in ingest(text)]
 grid = Grid(points)
