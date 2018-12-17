@@ -64,8 +64,6 @@ class Graph(object):
                 if node not in nodes:
                     bisect.insort(nodes, self.nodes[index])
 
-            # de-dup and sort
-            # nodes = sorted(set(nodes))
         self._traverse = "".join([i.id for i in travelled]) 
         return self._traverse
 
