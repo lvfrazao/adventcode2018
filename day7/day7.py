@@ -93,10 +93,10 @@ class Node(object):
         return self.id < other.id
 
     def __hash__(self):
-        return hash((self.id, tuple(self.fr), tuple(self.to)))
+        return hash(self.id)
     
     def __repr__(self):
-        return f"Node({self.id}, fr={self.init_fr}, to={self.init_to})"
+        return f"Node({self.id}, fr={self.fr}, to={self.to})"
     
     def __str__(self):
         return f"{self.id}: From: {self.fr} // To: {self.to}"
@@ -117,15 +117,16 @@ class InstructionsReader(object):
         return f"InstructionsReader({self.fname})"
 
 
-filepath = 'input.txt'
-#filepath = 'input_example.txt'
+if __name__ == "__main__":
+    filepath = 'input.txt'
+    #filepath = 'input_example.txt'
 
-g1 = Graph(InstructionsReader(filepath))
-origin = g1.origin
-for node in g1.nodes:
-    pass
+    g1 = Graph(InstructionsReader(filepath))
+    origin = g1.origin
+    for node in g1.nodes:
+        pass
 
-print(g1.unique_nodes)
-print(g1.origin)
-print(*g1.nodes, sep="\n")
-print("The fully traversed chain is:", g1.traverse)
+    print(g1.unique_nodes)
+    print(g1.origin)
+    print(*g1.nodes, sep="\n")
+    print("The fully traversed chain is:", g1.traverse)
